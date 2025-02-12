@@ -19,5 +19,5 @@ aws rds create-db-instance \
 Editar `pg_hba.conf`:
 
 ```conf
-hostssl all harbor spiffe://acme.harbor/harbor cert
+hostssl all harbor spiffe://be.harbor/harbor cert
 ```

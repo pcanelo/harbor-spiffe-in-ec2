@@ -56,7 +56,7 @@ storage_service:
 ### **Paso 5: Registrar Harbor en SPIFFE**
 
 ```sh
-/opt/spire/bin/spire-server entry create     -spiffeID spiffe://acme.harbor/harbor     -parentID spiffe://acme.harbor/node     -selector unix:uid:1000
+/opt/spire/bin/spire-server entry create     -spiffeID spiffe://be.harbor/harbor     -parentID spiffe://be.harbor/node     -selector unix:uid:1000
 ```
 
 ### **Paso 6: Instalar y Ejecutar Harbor**

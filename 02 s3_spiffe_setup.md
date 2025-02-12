@@ -53,5 +53,5 @@ Esta política asegura que solo identidades autenticadas por SPIFFE puedan acced
 Registrar el bucket como un recurso SPIFFE autorizado:
 
 ```sh
-/opt/spire/bin/spire-server entry create     -spiffeID spiffe://acme.harbor/s3     -parentID spiffe://acme.harbor/node     -selector aws:iam_role:spiffe-harbor-role
+/opt/spire/bin/spire-server entry create     -spiffeID spiffe://be.harbor/s3     -parentID spiffe://be.harbor/node     -selector aws:iam_role:spiffe-harbor-role
 ```

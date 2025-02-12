@@ -39,7 +39,7 @@ Crear una identidad SPIFFE para Redis:
 
 ```sh
 /opt/spire/bin/spire-server entry create \
-    -spiffeID spiffe://acme.harbor/redis \
-    -parentID spiffe://acme.harbor/node \
+    -spiffeID spiffe://be.harbor/redis \
+    -parentID spiffe://be.harbor/node \
     -selector unix:uid:1001
 ```

@@ -23,7 +23,7 @@ server {
     bind_address = "0.0.0.0"
     bind_port = 8081
     log_level = "INFO"
-    trust_domain = "acme.harbor"
+    trust_domain = "be.harbor"
 }
 ```
 
