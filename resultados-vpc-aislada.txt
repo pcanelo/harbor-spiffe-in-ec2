@@ -1,0 +1,96 @@
+aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=HarborVPC}]'
+
+VpcId": "vpc-02a0113a17a380428
+
+aws ec2 create-subnet --vpc-id vpc-02a0113a17a380428 --cidr-block 10.0.1.0/24 --availability-zone us-east-2a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=HarborSubnet}]'
+{
+    "Subnet": {
+        "AvailabilityZoneId": "use2-az1",
+        "OwnerId": "877668808660",
+        "AssignIpv6AddressOnCreation": false,
+        "Ipv6CidrBlockAssociationSet": [],
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "HarborSubnet"
+            }
+        ],
+        "SubnetArn": "arn:aws:ec2:us-east-2:877668808660:subnet/subnet-0fc738c37ef7b5449",
+        "EnableDns64": false,
+        "Ipv6Native": false,
+        "PrivateDnsNameOptionsOnLaunch": {
+            "HostnameType": "ip-name",
+            "EnableResourceNameDnsARecord": false,
+            "EnableResourceNameDnsAAAARecord": false
+        },
+        "SubnetId": "subnet-0fc738c37ef7b5449",
+        "State": "available",
+        "VpcId": "vpc-02a0113a17a380428",
+        "CidrBlock": "10.0.1.0/24",
+        "AvailableIpAddressCount": 251,
+        "AvailabilityZone": "us-east-2a",
+        "DefaultForAz": false,
+        "MapPublicIpOnLaunch": false
+    }
+}
+
+aws ec2 create-route-table --vpc-id vpc-02a0113a17a380428 --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=HarborRouteTable}]'
+{
+    "RouteTable": {
+        "Associations": [],
+        "PropagatingVgws": [],
+        "RouteTableId": "rtb-0313985ca54c20475",
+        "Routes": [
+            {
+                "DestinationCidrBlock": "10.0.0.0/16",
+                "GatewayId": "local",
+                "Origin": "CreateRouteTable",
+                "State": "active"
+            }
+        ],
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "HarborRouteTable"
+            }
+        ],
+        "VpcId": "vpc-02a0113a17a380428",
+        "OwnerId": "877668808660"
+    },
+    "ClientToken": "a714e20b-9649-4569-a02f-9131730e8252"
+}
+Paso 3
+aws ec2 associate-route-table --route-table-id rtb-02b1f7f34ffbbee8f --subnet-id subnet-0fc738c37ef7b5449
+{
+    "AssociationId": "rtbassoc-027687f433302fb0e",
+    "AssociationState": {
+        "State": "associated"
+    }
+}
+
+Paso 4
+aws ec2 create-security-group --group-name HarborSG --description "Security Group for Harbor" --vpc-id <VpcId>
+
+{
+    "GroupId": "sg-0ed952ef09e246d45",
+    "SecurityGroupArn": "arn:aws:ec2:us-east-2:877668808660:security-group/sg-0ed952ef09e246d45"
+}
+
+Paso 4b
+aws ec2 authorize-security-group-ingress --group-id <SecurityGroupId> --protocol tcp --port 443 --cidr 10.0.0.0/16
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-0557ed4ddb7037653",
+            "GroupId": "sg-0ed952ef09e246d45",
+            "GroupOwnerId": "877668808660",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 443,
+            "ToPort": 443,
+            "CidrIpv4": "10.0.0.0/16",
+            "SecurityGroupRuleArn": "arn:aws:ec2:us-east-2:877668808660:security-group-rule/sgr-0557ed4ddb7037653"
+        }
+    ]
+}
