@@ -11,7 +11,7 @@ aws ec2 run-instances --image-id ami-088b41ffb0933423f --instance-type t3.medium
 
 ```sh
 sudo dnf update -y && sudo dnf upgrade -y
-curl -o spire.tar.gz https://github.com/spiffe/spire/releases/latest/download/spire-<version>-linux-amd64.tar.gz
+curl -o spire.tar.gz https://github.com/spiffe/spire/releases/download/v1.11.1/spire-1.11.1-linux-amd64-musl.tar.gz
 mkdir -p /opt/spire && tar -xzf spire.tar.gz -C /opt/spire
 ```
 

@@ -5,6 +5,10 @@
 ```sh
 aws s3api create-bucket --bucket harbor-storage-bucket --region us-east-2
 ```
+En Outposts crear el s3 outposts
+```sh
+aws s3control create-bucket --bucket harbor-storage-bucket --region NNNN  cambiar
+```
 
 ### **Paso 2: Configurar Harbor para usar S3 como backend de almacenamiento**
 

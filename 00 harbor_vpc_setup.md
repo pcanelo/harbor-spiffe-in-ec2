@@ -1,4 +1,4 @@
-# **Tutorial: Implementación de Harbor con SPIFFE en AWS con Seguridad Aislada**
+# **Paso a paso: Implementación de Harbor con SPIFFE en AWS con Seguridad Aislada**
 
 ## **00 Creación de la VPC y Subnet Aislada**
 
