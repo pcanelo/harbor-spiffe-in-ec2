@@ -15,13 +15,17 @@ Guardar el `VpcId` de la respuesta.
 ### **Paso 2: Crear la Subnet Aislada**
 
 ```sh
-aws ec2 create-subnet --vpc-id <VpcId> --cidr-block 10.0.1.0/24 --availability-zone us-east-1a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=HarborSubnet}]'
+aws ec2 create-subnet --vpc-id <VpcId> --cidr-block 10.0.1.0/24 --availability-zone us-east-2a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=HarborSubnet}]'
 ```
 
 ### **Paso 3: Crear la Tabla de Rutas y Asociarla**
 
 ```sh
 aws ec2 create-route-table --vpc-id <VpcId> --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=HarborRouteTable}]'
+```
+Luego 
+
+```sh
 aws ec2 associate-route-table --route-table-id <RouteTableId> --subnet-id <SubnetId>
 ```
 

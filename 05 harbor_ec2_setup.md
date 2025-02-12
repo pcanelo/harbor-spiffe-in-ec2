@@ -3,7 +3,7 @@
 ### **Paso 1: Lanzar EC2 para Harbor**
 
 ```sh
-aws ec2 run-instances --image-id ami-088b41ffb0933423f --instance-type m5.xlarge --subnet-id <SubnetId> --security-group-ids <SecurityGroupId> --key-name my-key --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=HarborServer}]'
+aws ec2 run-instances --image-id ami-088b41ffb0933423f --instance-type m5.xlarge --subnet-id <SubnetId> --security-group-ids <SecurityGroupId> --key-name my-key --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=HarborServer}]' --user-data file://ssm-script.sh
 ```
 
 ### **Paso 2: Instalar Docker y Configurar Harbor (Amazon Linux 2023)**
@@ -49,7 +49,7 @@ storage_service:
   s3:
     accesskey: <AWS_ACCESS_KEY>
     secretkey: <AWS_SECRET_KEY>
-    region: us-east-1
+    region: us-east-2
     bucket: harbor-storage-bucket
 ```
 

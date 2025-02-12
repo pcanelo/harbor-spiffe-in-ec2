@@ -3,7 +3,8 @@
 ### **Paso 1: Lanzar EC2 para SPIFFE**
 
 ```sh
-aws ec2 run-instances --image-id ami-088b41ffb0933423f --instance-type t3.medium --subnet-id <SubnetId> --security-group-ids <SecurityGroupId> --key-name my-key --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=SpireServer}]'
+aws ec2 run-instances --image-id ami-088b41ffb0933423f --instance-type t3.medium --subnet-id <SubnetId> --security-group-ids <SecurityGroupId> --key-name my-key --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=SpireServer}]'  --user-data file://ssm-script.sh
+
 ```
 
 ### **Paso 2: Instalar SPIRE en EC2 (Amazon Linux 2023)**

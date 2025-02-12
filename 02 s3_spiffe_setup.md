@@ -3,7 +3,7 @@
 ### **Paso 1: Crear un Bucket en S3**
 
 ```sh
-aws s3api create-bucket --bucket harbor-storage-bucket --region us-east-1
+aws s3api create-bucket --bucket harbor-storage-bucket --region us-east-2
 ```
 
 ### **Paso 2: Configurar Harbor para usar S3 como backend de almacenamiento**
@@ -15,7 +15,7 @@ storage_service:
   s3:
     accesskey: <AWS_ACCESS_KEY>
     secretkey: <AWS_SECRET_KEY>
-    region: us-east-1
+    region: us-east-2
     bucket: harbor-storage-bucket
 ```
 
