@@ -14,36 +14,31 @@ sudo dnf install -y docker
 sudo systemctl enable --now docker
 ```
 
-### **Paso 3: Descargar e Instalar Harbor**
+### **Paso 3: Descargar e Instalar Harbor Offline**
 
 ```sh
-curl -O https://github.com/goharbor/harbor/releases/latest/download/harbor-online-installer.tgz
-tar -xvzf harbor-online-installer.tgz
+curl -s https://api.github.com/repos/goharbor/harbor/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep '\.tgz$' | wget -i -
+tar zxvf harbor-offline-installer-v*.tgz
 cd harbor
 ```
 
 ### **Paso 4: Configurar Harbor para Usar PostgreSQL, Redis y S3 con SPIFFE**
+### Ojo si hay rol IAM asociado a la EC2 para accesar los s3, no se necesita ACCESSKEY ni SECRETSKEY
 
 Editar `harbor.yml`:
 
 ```yaml
-database:
+external_database:
   type: postgresql
   host: my-rds-instance.xxxxxxx.us-east-1.rds.amazonaws.com
   port: 5432
   username: harbor
-  sslmode: verify-full
-  sslcert: /opt/spire/agent/data/svid.pem
-  sslkey: /opt/spire/agent/data/svid-key.pem
-  sslrootcert: /opt/spire/agent/data/root.pem
+
 
 external_redis:
   host: my-redis-instance.xxx.compute.amazonaws.com
   port: 6379
   tls: enabled
-  cert: /opt/spire/agent/data/svid.pem
-  key: /opt/spire/agent/data/svid-key.pem
-  cacert: /opt/spire/agent/data/root.pem
 
 storage_service:
   s3:
@@ -53,20 +48,16 @@ storage_service:
     bucket: harbor-storage-bucket
 ```
 
+### **Paso 5: Registrar Harbor en SPIFFE**
+
+```sh
+/opt/spire/bin/spire-server entry create     -spiffeID spiffe://be.harbor/harbor     -parentID spiffe://be.harbor/node     -selector unix:uid:1000
+```
+
 ### **Paso 6: Instalar y Ejecutar Harbor**
 
 ```sh
 ./install.sh
 ```
-
-
-### **Paso 7: Test Harbor web access 
-http://IP_ADDRESS
-OR
-https://IP_ADDRESS
-
-Default credentials
-Username: admin
-Password: Harbour12345
 
 Harbor ahora está configurado para usar PostgreSQL en RDS, Redis en EC2 y S3 como backend de almacenamiento, con autenticación segura a través de SPIFFE.
