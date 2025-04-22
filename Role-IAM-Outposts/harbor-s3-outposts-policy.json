@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3-outposts:PutObject",
+        "s3-outposts:GetObject",
+        "s3-outposts:ListBucket",
+        "s3-outposts:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3-outposts:$REGION:$ACCOUNT_ID:outpost/$OUTPOST_ID/bucket/$BUCKET_NAME",
+        "arn:aws:s3-outposts:$REGION:$ACCOUNT_ID:outpost/$OUTPOST_ID/bucket/$BUCKET_NAME/*"
+      ]
+    }
+  ]
+}
